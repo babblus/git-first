@@ -1,1 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMNETRA | Your Global Education Journey Begins Here</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #5E3BEE;
+            --accent: #FFC107;
+            --bg-gradient: linear-gradient(135deg, #ffffff 0%, #f4f7fa 100%);
+            --card-bg: rgba(255, 255, 255, 0.75);
+            --card-border: rgba(255, 255, 255, 0.5);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.06);
+            --glass-glow: rgba(94, 59, 238, 0.05);
+        }
 
+        [data-theme="dark"] {
+            --primary: #60a5fa;
+            --secondary: #a78bfa;
+            --accent: #fbbf24;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-border: rgba(255, 255, 255, 0.05);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --nav-bg: rgba(15, 23, 42, 0.85);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --glass-glow: rgba(255, 255, 255, 0.02);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            overflow-x: hidden;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* Scroll Progress Bar */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            z-index: 9999;
+        }
+
+        /* Glassmorphism Styles */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px 0 rgba(94, 59, 238, 0.15);
+            background: var(--glass-glow);
+        }
+
+        /* Utility Components & Section Layouts */
+        .section-padding { padding: 6rem 2rem; max-width: 1400px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+        .section-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+        /* Premium Buttons */
+        .btn-premium {
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+        }
+        .btn-primary-glow {
+            background: linear-gradient(135deg, #003366 0%, #5E3BEE 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(94, 59, 238, 0.3);
+        }
+        .btn-primary-glow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(94, 59, 238, 0.5);
+        }
+        .btn-secondary-glow {
+            background: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--secondary);
+        }
+        .btn-secondary-glow:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* Sticky Navigation Bar */
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            box-shadow: var(--shadow);
+            border-bottom: 1px solid var(--card-border);
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: #003366;
+            animation: pulseLogo 3s infinite ease-in-out;
+        }
+        @keyframes pulseLogo {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        .nav-menu { display: flex; list-style: none; gap: 1.5rem; align-items: center; }
+        .nav-menu a { text-decoration: none; color: var(--text-main); font-weight: 500; font-size: 0.95rem; transition: color 0.3s; }
+        .nav-menu a:hover { color: var(--secondary); }
+        .nav-actions { display: flex; gap: 1rem; align-items: center; }
+
+        /* Theme Toggle styles */
+        .theme-toggle { background: none; border: none; font-size: 1.2rem; color: var(--text-main); cursor: pointer; padding: 0.5rem; }
+
+        /* Full Screen Hero Section */
+        .hero-section {
+            position: relative;
+            min-height: 95vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: radial-gradient(circle at center, rgba(94, 59, 238, 0.08) 0%, transparent 70%);
+        }
+        .hero-bg-map {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.08;
+            background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            filter: grayscale(100%);
+        }
+        .hero-content h1 { font-size: 4rem; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: -1px; }
+        .hero-content h1 span { background: linear-gradient(90deg, #003366, #5E3BEE); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-content p { font-size: 1.25rem; color: var(--text-muted); max-width: 750px; margin: 0 auto 2.5rem; line-height: 1.8; }
+        .hero-actions { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+
+        /* Dynamic Country Grid with Flag Colors */
+        .country-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .country-card { overflow: hidden; position: relative; display: flex; flex-direction: column; height: 100%; }
+        .flag-strip-accent { height: 8px; width: 100%; display: flex; }
+        
+        /* Country Specific Flag Colors Rules */
+        .flag-uk .s1 { background: #012169; flex: 1; } .flag-uk .s2 { background: #ffffff; flex: 0.2; } .flag-uk .s3 { background: #C8102E; flex: 1; }
+        .flag-spain .s1 { background: #AA1521; flex: 1; } .flag-spain .s2 { background: #FFC400; flex: 2; } .flag-spain .s3 { background: #AA1521; flex: 1; }
+        .flag-germany .s1 { background: #000000; flex: 1; } .flag-germany .s2 { background: #DD0000; flex: 1; } .flag-germany .s3 { background: #FFCE00; flex: 1; }
+        .flag-malta .s1 { background: #FFFFFF; flex: 1; border-right: 1px solid #ccc; } .flag-malta .s2 { background: #D21034; flex: 1; }
+        .flag-poland .s1 { background: #FFFFFF; flex: 1; } .flag-poland .s2 { background: #DC143C; flex: 1; }
+        .flag-switzerland .s1 { background: #DA291C; flex: 1; position: relative; }
+        .flag-nz .s1 { background: #00247D; flex: 3; } .flag-nz .s2 { background: #FFFFFF; flex: 0.2; } .flag-nz .s3 { background: #CC142B; flex: 1; }
+        .flag-skorea .s1 { background: #FFFFFF; flex: 2; } .flag-skorea .s2 { background: #CD2E3A; flex: 1; } .flag-skorea .s3 { background: #0047A0; flex: 1; }
+        .flag-georgia .s1 { background: #FFFFFF; flex: 2; } .flag-georgia .s2 { background: #FF0000; flex: 1; }
+        .flag-finland .s1 { background: #FFFFFF; flex: 1; } .flag-finland .s2 { background: #003580; flex: 1; }
+        .flag-france .s1 { background: #0055A4; flex: 1; } .flag-france .s2 { background: #FFFFFF; flex: 1; } .flag-france .s3 { background: #EF4135; flex: 1; }
+
+        .country-img-container { height: 180px; position: relative; overflow: hidden; background: #e2e8f0; }
+        .country-img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .country-card:hover .country-img-container img { transform: scale(1.1); }
+        .country-badge-flag { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.9); padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 1.2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .country-info { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .country-info h3 { font-size: 1.4rem; margin-bottom: 0.5rem; font-weight: 700; }
+        .country-info p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.6; }
+
+        /* Services & Features Interactive Grid */
+        .services-grid, .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .service-card, .why-card { padding: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+        .icon-wrapper { width: 60px; height: 60px; border-radius: 12px; background: rgba(94, 59, 238, 0.1); color: #5E3BEE; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+
+        /* Premium Process Timeline Layout */
+        .timeline { position: relative; max-width: 900px; margin: 0 auto; padding: 2rem 0; }
+        .timeline::before { content: ''; position: absolute; left: 50%; width: 4px; background: linear-gradient(to bottom, #003366, #5E3BEE); top: 0; bottom: 0; transform: translateX(-50%); border-radius: 4px; }
+        .timeline-item { position: relative; width: 50%; padding: 2rem; box-sizing: border-box; }
+        .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+        .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+        .timeline-dot { position: absolute; top: 2.5rem; width: 20px; height: 20px; background: #FFC107; border: 4px solid var(--card-bg); border-radius: 50%; z-index: 10; }
+        .timeline-item:nth-child(odd) .timeline-dot { right: -10px; }
+        .timeline-item:nth-child(even) .timeline-dot { left: -10px; }
+        .timeline-content h3 { font-size: 1.3rem; margin-bottom: 0.5rem; color: #5E3BEE; }
+
+        /* Counter Statistics */
+        .stats-bar { background: linear-gradient(135deg, #003366 0%, #0f172a 100%); color: white; padding: 4rem 2rem; margin: 4rem 0; }
+        .stats-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 2rem; text-align: center; }
+        .stat-item h3 { font-size: 3rem; font-weight: 800; color: #FFC107; margin-bottom: 0.5rem; }
+        .stat-item p { font-size: 1rem; color: #94a3b8; }
+
+        /* Structured Comparison Table */
+        .comparison-wrapper { overflow-x: auto; margin: 3rem 0; border-radius: 16px; box-shadow: var(--shadow); }
+        .comp-table { width: 100%; border-collapse: collapse; text-align: left; background: var(--card-bg); min-width: 800px; }
+        .comp-table th, .comp-table td { padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--card-border); }
+        .comp-table th { background: #003366; color: white; font-weight: 600; }
+        .comp-table tr:hover { background: var(--glass-glow); }
+
+        /* FAQ Accordion Section */
+        .faq-container { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+        .faq-item { border-radius: 12px; overflow: hidden; }
+        .faq-trigger { width: 100%; text-align: left; padding: 1.5rem; background: var(--card-bg); border: none; font-size: 1.1rem; font-weight: 600; color: var(--text-main); display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .faq-panel { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: rgba(255,255,255,0.02); }
+        .faq-panel-content { padding: 1.5rem; color: var(--text-muted); line-height: 1.6; font-size: 0.98rem; border-top: 1px solid var(--card-border); }
+
+        /* Testimonials Slider Layout */
+        .testimonial-slider { max-width: 800px; margin: 0 auto; position: relative; padding: 2rem; text-align: center; }
+        .slide-card { display: none; padding: 2rem; }
+        .slide-card.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+        .student-avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid var(--secondary); }
+        .rating-stars { color: #FFC107; margin-bottom: 1rem; }
+        .slider-controls { display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; }
+        .slider-arrow { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--card-border); background: var(--card-bg); color: var(--text-main); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+        /* Contact Section with Future Map Placeholder */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; }
+        .contact-form-box { padding: 2.5rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; font-size: 0.9rem; }
+        .form-control { width: 100%; padding: 0.8rem 1rem; border-radius: 8px; border: 1px solid var(--card-border); background: var(--bg-gradient); color: var(--text-main); font-size: 1rem; }
+        .map-placeholder { background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%); border-radius: 16px; height: 100%; min-height: 350px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #334155; padding: 2rem; border: 2px dashed #64748b; }
+
+        /* Floating Contact Buttons Panel */
+        .floating-action-container { position: fixed; bottom: 2rem; right: 2rem; display: flex; flex-direction: column; gap: 0.8rem; z-index: 9999; }
+        .float-btn { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.2); transition: transform 0.3s; }
+        .float-btn:hover { transform: scale(1.1) rotate(5deg); }
+        .float-call { background: #2563eb; }
+        .float-wa { background: #25D366; }
+        .float-mail { background: #ea4335; }
+        .back-to-top { background: #475569; display: none; cursor: pointer; }
+
+        /* Footer */
+        footer { background: #0f172a; color: #94a3b8; padding: 5rem 2rem 2rem; border-top: 1px solid rgba(255,255,255,0.05); }
+        .footer-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 3rem; }
+        .footer-col h4 { color: white; font-size: 1.2rem; margin-bottom: 1.5rem; font-weight: 600; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+        .footer-col ul a { color: #94a3b8; text-decoration: none; transition: color 0.3s; }
+        .footer-col ul a:hover { color: white; }
+        .social-icons { display: flex; gap: 1rem; margin-top: 1rem; }
+        .social-icons a { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.05); color: white; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.3s; }
+        .social-icons a:hover { background: var(--secondary); }
+        .footer-bottom { max-width: 1400px; margin: 4rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 0.9rem; }
+
+        /* Dedicated Modal Forms & Dynamic Portals */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 1rem; }
+        .auth-container { max-width: 450px; width: 100%; padding: 3rem 2.5rem; position: relative; }
+        .close-modal-btn { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; font-size: 1.5rem; color: var(--text-muted); cursor: pointer; }
+
+        /* Employee Live Sync Dashboard view styling */
+        .portal-layout { width: 100%; max-width: 1200px; height: 85vh; display: grid; grid-template-columns: 260px 1fr; background: var(--bg-gradient); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--card-border); }
+        .portal-sidebar { background: #0f172a; color: white; padding: 2rem; display: flex; flex-direction: column; gap: 2rem; }
+        .portal-nav-btn { background: none; border: none; color: #94a3b8; padding: 0.8rem 1rem; text-align: left; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 8px; transition: all 0.3s; }
+        .portal-nav-btn.active, .portal-nav-btn:hover { background: rgba(255,255,255,0.1); color: white; }
+        .portal-main-view { padding: 2.5rem; overflow-y: auto; background: var(--card-bg); color: var(--text-main); }
+        .portal-data-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        .data-table-admin { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        .data-table-admin th, .data-table-admin td { padding: 1rem; border-bottom: 1px solid var(--card-border); text-align: left; }
+        .data-table-admin th { background: rgba(0,0,0,0.05); font-weight: 600; }
+        
+        /* Keyframe Micro-animations */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Media Queries across viewports */
+        @media (max-width: 1024px) {
+            .timeline::before { left: 20px; }
+            .timeline-item { width: 100%; padding-left: 50px; text-align: left !important; }
+            .timeline-dot { left: 10px !important; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .portal-layout { grid-template-columns: 1fr; height: 95vh; }
+            .portal-sidebar { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Progress Tracker Indicator -->
+    <div id="scroll-progress"></div>
+
+    <!-- Floating Global Action Communication Dock -->
+    <div class="floating-action-container">
+        <a href="tel:+919281179362" class="float-btn float-call" title="Call Operations Support"><i class="fa-solid fa-phone"></i></a>
+        <a href="https://wa.me/9281179362?text=Hello%20OMNETRA,%20I%20would%20like%20to%20know%20more%20about%20studying%20abroad." target="_blank" class="float-btn float-wa" title="WhatsApp Instant Chat"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="mailto:omnetraconsultancy@gmail.com" class="float-btn float-mail" title="Drop Formal Email"><i class="fa-solid fa-envelope"></i></a>
+        <button onclick="scrollToTop()" id="backTopBtn" class="float-btn back-to-top" title="Scroll To Top"><i class="fa-solid fa-arrow-up"></i></button>
+    </div>
+
+    <!-- Navigation Header Matrix -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo-box">
+                <i class="fa-solid fa-graduation-cap" style="color: #5E3BEE;"></i> OMNETRA
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#countries">Countries</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#process">Our Process</a></li>
+                <li><a href="#why-choose">Why Us</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" onclick="toggleThemeSystem()" title="Toggle Interface Mode">
+                    <i class="fa-solid fa-moon" id="theme-icon"></i>
+                </button>
+                <a href="#contact" class="btn-premium btn-primary-glow" style="font-size: 0.85rem; padding: 0.6rem 1.2rem;">Book Free Consultation</a>
+                <button onclick="toggleModal('employee-login-modal', true)" class="btn-premium btn-secondary-glow" style="font-size: 0.85rem; padding: 0.6rem 1.2rem;">Employee Login</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Master Content Sections Structure -->
+    <main id="home">
+        
+        <!-- Premium Hero Canopy Section -->
+        <section class="hero-section">
+            <div class="hero-bg-map"></div>
+            <div class="hero-content">
+                <div class="logo-box" style="justify-content: center; margin-bottom: 1.5rem; font-size: 2.5rem;">
+                    <i class="fa-solid fa-graduation-cap" style="color: #5E3BEE;"></i> OMNETRA
+                </div>
+                <h1>Study Abroad With <span>Confidence</span></h1>
+                <p>"Turning Dreams Into Global Degrees." We guide students from profile evaluation to university admission and visa approval through personalized counselling and expert support.</p>
+                <div class="hero-actions">
+                    <a href="#contact" class="btn-premium btn-primary-glow"><i class="fa-solid fa-calendar-check"></i> Book Free Consultation</a>
+                    <a href="#countries" class="btn-premium btn-secondary-glow"><i class="fa-solid fa-earth-americas"></i> Explore Countries</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Matrix Statistics Counter bar -->
+        <section class="stats-bar">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <h3>5000+</h3>
+                    <p>Students Guided Successfully</p>
+                </div>
+                <div class="stat-item">
+                    <h3>11</h3>
+                    <p>Premium Countries Served</p>
+                </div>
+                <div class="stat-item">
+                    <h3>99.2%</h3>
+                    <p>Visa Success Rate Guaranteed</p>
+                </div>
+                <div class="stat-item">
+                    <h3>300+</h3>
+                    <p>Global University Networks</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100%</h3>
+                    <p>Scholarship Matching Assistance</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About OMNETRA Section -->
+        <section class="section-padding" id="about">
+            <div class="section-header">
+                <h2>About OMNETRA</h2>
+                <p>Empowering global career pathways via holistic academic placement engineering.</p>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+                <div class="glass-card" style="padding: 2.5rem;">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: #003366;">Our Foundations</h3>
+                    <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem;">OMNETRA serves as a premium architectural nexus helping students achieve their precise dream of studying abroad by providing complete end-to-end guidance from comprehensive profile evaluation to strategic visa approval.</p>
+                    <p style="color: var(--text-muted); line-height: 1.7;">We merge corporate operational precision with deep institutional insights to match personal aspirations to highly rewarding global academic landscapes.</p>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div class="glass-card" style="padding: 1.5rem;">
+                        <div class="icon-wrapper"><i class="fa-solid fa-bullseye"></i></div>
+                        <h4 style="margin-top: 0.5rem;">Mission</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Democratize access to premium borderless institutional degrees.</p>
+                    </div>
+                    <div class="glass-card" style="padding: 1.5rem;">
+                        <div class="icon-wrapper"><i class="fa-solid fa-eye"></i></div>
+                        <h4 style="margin-top: 0.5rem;">Vision</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">The world's most trusted consultative data-driven student support hub.</p>
+                    </div>
+                    <div class="glass-card" style="padding: 1.5rem;">
+                        <div class="icon-wrapper"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h4 style="margin-top: 0.5rem;">Integrity & Trust</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Transparent code of metrics matching absolute candidate profiles honestly.</p>
+                    </div>
+                    <div class="glass-card" style="padding: 1.5rem;">
+                        <div class="icon-wrapper"><i class="fa-solid fa-chart-line"></i></div>
+                        <h4 style="margin-top: 0.5rem;">Student Success</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Maximizing post-study market mobility via expert planning layouts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Destination Countries Hub View -->
+        <section class="section-padding" id="countries">
+            <div class="section-header">
+                <h2>Destinations We Cover</h2>
+                <p>Explore your academic future within premier education systems, featuring structural country-flag accents.</p>
+            </div>
+            <!-- Dynamic Country Engine target injection container -->
+            <div class="country-grid" id="country-render-canvas">
+                <!-- Fallback Static Server Side Render matching specifications -->
+            </div>
+        </section>
+
+        <!-- Dynamic Structural Analytical Public vs Private Comparison Platform -->
+        <section class="section-padding">
+            <div class="section-header">
+                <h2>Public vs Private Universities</h2>
+                <p>A rigorous metric structural comparison built to assist optimal institutional pathway selection.</p>
+            </div>
+            <div class="comparison-wrapper">
+                <table class="comp-table">
+                    <thead>
+                        <tr>
+                            <th>Strategic Metric Pillar</th>
+                            <th>Public Universities System</th>
+                            <th>Private Institutional Ecosystem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Admission Requirements</strong></td><td>Highly selective, strict grade Cut-offs and competitive language requirements.</td><td>Holistic profiles evaluation, structured entry paths, adaptive options.</td></tr>
+                        <tr><td><strong>Scholarship Opportunities</strong></td><td>Extensive state-funded allowances, merit bursaries, research assistant positions.</td><td>Institutional endowment awards, custom flexible corporate-sponsored fellowships.</td></tr>
+                        <tr><td><strong>Research Opportunities</strong></td><td>Massive state grants, heavy laboratory facilities, breakthrough academic focus.</td><td>Agile market-applied innovation setups, private corporate venture labs.</td></tr>
+                        <tr><td><strong>Industry Connections</strong></td><td>Deep institutional connections with state departments and historic firms.</td><td>Direct corporate placements, incubation labs, active professional board networks.</td></tr>
+                        <tr><td><strong>Internship Opportunities</strong></td><td>Structured structured placement calendars built within public frameworks.</td><td>Direct networking channels, proactive industry match-making structures.</td></tr>
+                        <tr><td><strong>Class Size</strong></td><td>Larger auditorium settings offering diverse network interaction.</td><td>Small personalized cohort designs favoring custom execution support.</td></tr>
+                        <tr><td><strong>Campus Facilities</strong></td><td>Sprawling public utility systems, deep library archives, historic layouts.</td><td>High-end modern technological infrastructures, modern collaborative hubs.</td></tr>
+                        <tr><td><strong>Employment Rate</strong></td><td>Consistently high standing backed by strong national prestige indexes.</td><td>Direct pathways into active global tech, business and industrial networks.</td></tr>
+                        <tr><td><strong>Global Recognition</strong></td><td>Universally recognized historical degrees anchored to state accreditation systems.</td><td>Highly recognized for modern professional specializations, globally competitive.</td></tr>
+                        <tr><td><strong>Student Experience</strong></td><td>Immersive, self-reliant, dynamic multi-cultural engagement environments.</td><td>Highly mentored, tailored support frameworks and high care layouts.</td></tr>
+                        <tr><td><strong>Program Flexibility</strong></td><td>Rigorous structured milestones following clear academic blueprints.</td><td>Modular choice setups, specialized interdisciplinary execution pathways.</td></tr>
+                        <tr><td><strong>Practical Learning</strong></td><td>Theoretically sound with structural academic lab experiments.</td><td>Project-driven corporate case problem sets, agile practical exposure.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                <div class="glass-card" style="padding: 2rem;">
+                    <h4 style="color: #003366; margin-bottom: 0.5rem;"><i class="fa-solid fa-graduation-cap"></i> Who Should Choose Public Universities</h4>
+                    <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">Students with top-tier academic standing, excellent language performance metrics, who are highly self-driven and seek research-intensive careers within traditional parameters.</p>
+                </div>
+                <div class="glass-card" style="padding: 2rem;">
+                    <h4 style="color: #5E3BEE; margin-bottom: 0.5rem;"><i class="fa-solid fa-user-tie"></i> Who Should Choose Private Universities</h4>
+                    <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">Candidates seeking fast industry networking access, agile class size settings, responsive application systems, and specialized contemporary job market entry preparation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Premium Core Services Section Matrix -->
+        <section class="section-padding" id="services">
+            <div class="section-header">
+                <h2>Our End-to-End Services</h2>
+                <p>Every step engineered flawlessly for smooth cross-border academic transformations.</p>
+            </div>
+            <div class="services-grid" id="services-injection-pane"></div>
+        </section>
+
+        <!-- Why Choose OMNETRA Section Grid -->
+        <section class="section-padding" id="why-choose">
+            <div class="section-header">
+                <h2>Why Choose OMNETRA</h2>
+                <p>Unmatched operational capabilities driving absolute candidate placement success models.</p>
+            </div>
+            <div class="why-grid" id="why-injection-pane"></div>
+        </section>
+
+        <!-- Process Animated Timeline Layout -->
+        <section class="section-padding" id="process">
+            <div class="section-header">
+                <h2>Our Proven Process</h2>
+                <p>A step-by-step master operational framework ensuring predictable institutional landing success.</p>
+            </div>
+            <div class="timeline" id="process-injection-pane"></div>
+        </section>
+
+        <!-- Testimonials Interactive Segment -->
+        <section class="section-padding" id="testimonials">
+            <div class="section-header">
+                <h2>What Our Students Say</h2>
+                <p>Real academic success metrics shared directly by our global university cohorts.</p>
+            </div>
+            <div class="testimonial-slider glass-card">
+                <div id="testimonial-slide-deck"></div>
+                <div class="slider-controls">
+                    <button class="slider-arrow" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="slider-arrow" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Structured Comprehensive 20 FAQ Module Accordions -->
+        <section class="section-padding" id="faq">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Clear, direct answers across admission vectors, financial planning mechanics, and visa logistics rules.</p>
+            </div>
+            <div class="faq-container" id="faq-injection-pane"></div>
+        </section>
+
+        <!-- Contact Segment with Form and Spatial Map Reservation -->
+        <section class="section-padding" id="contact">
+            <div class="section-header">
+                <h2>Connect With Our Global Advisors</h2>
+                <p>Submit your precise information details to lock down a specialized strategic advisory slot.</p>
+            </div>
+           
+                <div style="display: flex; flex-direction: column; gap: 2rem;">
+                    <div class="glass-card" style="padding: 2rem;">
+                        <h4 style="font-size: 1.25rem; margin-bottom: 1rem; color: #003366;">Corporate Communication Point</h4>
+                        <p style="margin-bottom: 0.8rem;"><i class="fa-solid fa-building" style="color:#5E3BEE; margin-right:8px;"></i> <strong>OMNETRA Corporate Headquarters</strong></p>
+                        <p style="margin-bottom: 0.8rem;"><i class="fa-solid fa-phone" style="color:#2563eb; margin-right:8px;"></i> Central Line: 9281179362</p>
+                        <p style="margin-bottom: 0.8rem;"><i class="fa-solid fa-envelope" style="color:#ea4335; margin-right:8px;"></i> Official Mail: omnetraconsultancy@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modals Layout Infrastructure Matrix Overlay -->
+    
+    <!-- 1. Dedicated Employee Login Modal View Screen Frame -->
+    <div class="modal-overlay" id="employee-login-modal">
+        <div class="glass-card auth-container">
+            <button class="close-modal-btn" onclick="toggleModal('employee-login-modal', false)">&times;</button>
+            <div class="logo-box" style="justify-content: center; margin-bottom: 1rem;">
+                <i class="fa-solid fa-graduation-cap" style="color: #5E3BEE;"></i> OMNETRA
+            </div>
+            <h3 style="text-align: center; margin-bottom: 1.5rem; font-weight: 700;">Employee Login</h3>
+            <form onsubmit="executeEmployeeAuth(event)">
+                <div class="form-group">
+                    <label>Employee ID / Username</label>
+                    <input type="text" id="auth-username" class="form-control" required placeholder="EMP2026">
+                </div>
+                <div class="form-group">
+                    <label>Secure Password</label>
+                    <input type="password" id="auth-password" class="form-control" required placeholder="••••••••">
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; font-size: 0.85rem;">
+                    <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                        <input type="checkbox"> Remember Me
+                    </label>
+                    <a href="#" style="color: var(--secondary); text-decoration: none;">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn-premium btn-primary-glow" style="width: 100%; justify-content: center; margin-bottom: 1rem;">Login System</button>
+                <button type="button" onclick="toggleModal('employee-login-modal', false)" class="btn-premium btn-secondary-glow" style="width: 100%; justify-content: center;">Back to Website</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. Secure Employee Dynamic Live Sync Database Dashboard Panel Simulation -->
+    <div class="modal-overlay" id="employee-dashboard-portal" style="padding: 0;">
+        <div class="portal-layout">
+            <aside class="portal-sidebar">
+                <div>
+                    <h3 style="color: white; font-weight: 800; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-gears" style="color: #FFC107;"></i> OMNETRA INTERNAL</h3>
+                    <p style="font-size: 0.75rem; color: #64748b; margin-top: 4px;">Shared Unified DB Matrix (Live)</p>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <button class="portal-nav-btn active" onclick="switchDashboardTab('countries')"><i class="fa-solid fa-earth-europe"></i> Manage Countries</button>
+                    <button class="portal-nav-btn" onclick="switchDashboardTab('universities')"><i class="fa-solid fa-school"></i> Manage Universities</button>
+                </div>
+                <div style="margin-top: auto;">
+                    <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 1rem;"><i class="fa-solid fa-circle-user" style="color: #25D366;"></i> Auth Session: Active Admin</p>
+                    <button onclick="terminateAuthSession()" class="btn-premium btn-primary-glow" style="width:100%; padding: 0.6rem; font-size: 0.85rem;"><i class="fa-solid fa-power-off"></i> Exit Portal</button>
+                </div>
+            </aside>
+            <main class="portal-main-view">
+                
+                <!-- Tab Panel View A: Countries DB Node -->
+                <div id="dash-panel-countries" class="dash-panel-node">
+                    <div class="portal-data-header">
+                        <h2>Country Node System Management (Shared Sync)</h2>
+                        <button class="btn-premium btn-primary-glow" onclick="launchAddCountryLogic()"><i class="fa-solid fa-plus"></i> Add New Country</button>
+                    </div>
+                    <table class="data-table-admin">
+                        <thead>
+                            <tr><th>Country Name</th><th>Flag Icon</th><th>Global System Status</th><th>Operational Matrix Action</th></tr>
+                        </thead>
+                        <tbody id="admin-country-rows-target"></tbody>
+                    </table>
+                </div>
+
+                <!-- Tab Panel View B: Universities DB Node -->
+                <div id="dash-panel-universities" class="dash-panel-node" style="display: none;">
+                    <div class="portal-data-header">
+                        <h2>University & Course Database Cluster</h2>
+                        <button class="btn-premium btn-primary-glow" onclick="launchAddUniLogic()"><i class="fa-solid fa-plus"></i> Add University Profile</button>
+                    </div>
+                    <table class="data-table-admin">
+                        <thead>
+                            <tr><th>University Profile Card</th><th>City Location</th><th>Sector Classification</th><th>Status</th><th>Database Operations</th></tr>
+                        </thead>
+                        <tbody id="admin-uni-rows-target"></tbody>
+                    </table>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Country Dedicated Deep-Dive Structural Modal View Canvas -->
+    <div class="modal-overlay" id="country-detail-profile-modal">
+        <div class="glass-card" style="max-width: 1000px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 3rem; position: relative;">
+            <button class="close-modal-btn" onclick="toggleModal('country-detail-profile-modal', false)">&times;</button>
+            <div id="country-detail-profile-payload-outlet"></div>
+        </div>
+    </div>
+
+    <!-- Corporate Structured Footer Matrix Layout -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo-box" style="color: white; margin-bottom: 1rem;">
+                    <i class="fa-solid fa-graduation-cap" style="color: #5E3BEE;"></i> OMNETRA
+                </div>
+                <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">A premier architecture for worldwide academic placement and seamless regulatory clearance pathways.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook Link Context"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="LinkedIn Link Context"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Instagram Link Context"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter Link Context"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home Matrix Hub</a></li>
+                    <li><a href="#about">About Core Principles</a></li>
+                    <li><a href="#services">Services Architecture</a></li>
+                    <li><a href="#process">Timeline Framework</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Core Destinations</h4>
+                <ul>
+                    <li><a href="#countries">United Kingdom</a></li>
+                    <li><a href="#countries">Spain</a></li>
+                    <li><a href="#countries">Germany</a></li>
+                    <li><a href="#countries">France</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Infrastructure</h4>
+                <p style="font-size: 0.9rem; margin-bottom: 0.5rem; color: white;">Operational Support Helpdesk</p>
+                <p style="font-size: 0.95rem; font-weight: 700; color: #FFC107; margin-bottom: 1rem;">9281179362</p>
+                <p style="font-size: 0.85rem; line-height: 1.5;">Direct Enquiries Gateway Routing: omnetraconsultancy@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 OMNETRA. All Rights Reserved. Enterprise Educational Architecture Deployment.</p>
+        </div>
+    </footer>
+
+    <!-- Comprehensive Frontend Database Core State Manager & Script System Logic Engine -->
+    <script>
+        /* Shared Synchronized Virtual Memory Database (Real-time CRUD) */
+        let localStateDB = {
+            countries: [
+                { id: "uk", name: "United Kingdom", flag: "🇬🇧", cssClass: "flag-uk", desc: "Access world-renowned degrees, accelerated programs, and intense post-study professional work tracks.", enabled: true },
+                { id: "spain", name: "Spain", flag: "🇪🇸", cssClass: "flag-spain", desc: "Home to tier-1 global business ecosystems and dynamic innovation architectures within the EU area.", enabled: true },
+                { id: "germany", name: "Germany", flag: "🇩🇪", cssClass: "flag-germany", desc: "The industrial powerhouse delivering precision research models with massive tuition-free public structures.", enabled: true },
+                { id: "malta", name: "Malta", flag: "🇲🇹", cssClass: "flag-malta", desc: "A fast-growing English-speaking European technology hub presenting high placement mobility metrics.", enabled: true },
+                { id: "poland", name: "Poland", flag: "🇵🇱", cssClass: "flag-poland", desc: "A robust structural academic economy with versatile technical engineering pathways and friendly culture.", enabled: true },
+                { id: "switzerland", name: "Switzerland", flag: "🇨🇭", cssClass: "flag-switzerland", desc: "Unmatched standards in premium banking, luxury operational sectors, and cutting edge science systems.", enabled: true },
+                { id: "nz", name: "New Zealand", flag: "🇳🇿", cssClass: "flag-nz", desc: "Renowned lifestyle security and top public universities presenting robust permanent settlement growth paths.", enabled: true },
+                { id: "skorea", name: "South Korea", flag: "🇰🇷", cssClass: "flag-skorea", desc: "A highly advanced technical superhub leading global consumer sectors and computational engineering.", enabled: true },
+                { id: "georgia", name: "Georgia", flag: "🇬🇪", cssClass: "flag-georgia", desc: "Rapidly advancing academic gateway focused on affordable international medical and business degrees.", enabled: true },
+                { id: "finland", name: "Finland", flag: "🇫🇮", cssClass: "flag-finland", desc: "Consistently ranked highest for educational satisfaction metrics and strong computational innovation.", enabled: true },
+                { id: "france", name: "France", flag: "🇫🇷", cssClass: "flag-france", desc: "A major destination for elite engineering clusters, management tracks, and extensive state subsidies.", enabled: true }
+            ],
+            universities: [
+                { id: "uni-1", name: "Imperial College London Matrix", city: "London", type: "Public", enabled: true, description: "Elite research hub specializing in science, engineering and financial analytics.", courses: "Data Science, Advanced Computing", dead: "March 30" },
+                { id: "uni-2", name: "Schiller International University", city: "Madrid", type: "Private", enabled: true, description: "Premier international workspace building multi-campus operational business leaders.", courses: "Global MBA, Data Science Track", dead: "Rolling Admissions" },
+                { id: "uni-3", name: "Technical University of Munich Cluster", city: "Munich", type: "Public", enabled: true, description: "Germany's leading absolute engineering ecosystem fostering industrial breakthroughs.", courses: "Robotics System, Machine Learning", dead: "January 15" }
+            ]
+        };
+
+        /* Application Runtime Initializer Injection Hook */
+        document.addEventListener("DOMContentLoaded", () => {
+            renderPublicCountryGridCanvas();
+            renderDynamicServicesStructure();
+            renderDynamicWhyUSStructure();
+            renderTimelineProcessArchitecture();
+            renderStructuralFAQSystem();
+            initTestimonialSlideState();
+            
+            // Dynamic Window Scroll Tracking Handler Hook
+            window.addEventListener('scroll', () => {
+                const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = (window.scrollY / totalHeight) * 100;
+                document.getElementById('scroll-progress').style.width = progress + '%';
+                
+                const topBtn = document.getElementById("backTopBtn");
+                if (window.scrollY > 400) { topBtn.style.display = "flex"; } else { topBtn.style.display = "none"; }
+            });
+        });
+
+        /* Core Interface Theme Mode Configuration Toggle Rule Engine */
+        function toggleThemeSystem() {
+            const currentTheme = document.documentElement.getAttribute("data-theme");
+            const nextTheme = currentTheme === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", nextTheme);
+            const icon = document.getElementById("theme-icon");
+            if(nextTheme === "dark") {
+                icon.className = "fa-solid fa-sun";
+            } else {
+                icon.className = "fa-solid fa-moon";
+            }
+        }
+
+        /* Generic Modal Window State Matrix Handler Tool */
+        function toggleModal(modalId, actionFlag) {
+            document.getElementById(modalId).style.display = actionFlag ? "flex" : "none";
+        }
+
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        /* Public Dynamic View Painting Canvas Engine (Real-Time Database Sync Target) */
+        function renderPublicCountryGridCanvas() {
+            const container = document.getElementById("country-render-canvas");
+            container.innerHTML = "";
+            
+            localStateDB.countries.filter(c => c.enabled).forEach(country => {
+                const card = document.createElement("div");
+                card.className = "glass-card country-card";
+                card.innerHTML = `
+                    <div class="flag-strip-accent ${country.cssClass}">
+                        <div class="s1"></div><div class="s2"></div><div class="s3"></div>
+                    </div>
+                    <div class="country-img-container">
+                        <span class="country-badge-flag">${country.flag}</span>
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" alt="${country.name} Profile System Base">
+                    </div>
+                    <div class="country-info">
+                        <div>
+                            <h3>${country.name}</h3>
+                            <p>${country.desc}</p>
+                        </div>
+                        <button class="btn-premium btn-secondary-glow" style="width: 100%; justify-content: center;" onclick="launchCountryDeepDiveModal('${country.id}')">Explore Country Details <i class="fa-solid fa-circle-arrow-right"></i></button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        /* Static Injection Component Assets Framework Sets */
+        function renderDynamicServicesStructure() {
+            const pane = document.getElementById("services-injection-pane");
+            const structuralServicesData = [
+                { icon: "fa-user-check", title: "Profile Reviewing", text: "In-depth analytics on academic historical standings to target high-probability elite matching systems." },
+                { icon: "fa-list-ol", title: "University Shortlisting", text: "Strategic distribution balancing public system choices and tier-1 highly interactive private platforms." },
+                { icon: "fa-language", title: "English Proficiency Assistance", text: "Targeted support mechanisms ensuring master benchmarks across IELTS, TOEFL, PTE, and Duolingo tracks." },
+                { icon: "fa-passport", title: "Visa Assistance", text: "End-to-end support for visa file completion, financial compliance checking, and expert regulatory interviews." },
+                { icon: "fa-file-lines", title: "SOP Writing", text: "Personal structural narrative alignment building unique value propositions for absolute admission committees." },
+                { icon: "fa-envelope-open-text", title: "Cover Letter Preparation", text: "Flawless formatting clearly stating intent, profile assets, and structural clear background configurations." }
+            ];
+            structuralServicesData.forEach(s => {
+                pane.innerHTML += `
+                    <div class="glass-card service-card">
+                        <div class="icon-wrapper"><i class="fa-solid ${s.icon}"></i></div>
+                        <h3>${s.title}</h3>
+                        <p style="font-size:0.92rem; color:var(--text-muted); line-height:1.6;">${s.text}</p>
+                    </div>
+                `;
+            });
+        }
+
+        function renderDynamicWhyUSStructure() {
+            const pane = document.getElementById("why-injection-pane");
+            const indicators = [
+                { icon: "fa-id-card-clip", title: "Profile Evaluation", text: "Precision automated baseline mapping matching accurate candidate records to global admission expectations honestly." },
+                { icon: "fa-user-tie", title: "Expert Counselling", text: "Dedicated professional support mapping precise lifestyle goals, university networks, and post-study work tracks." },
+                { icon: "fa-shield-halved", title: "Visa Experts", text: "Deep technical insight across financial compliance requirements keeping a 99.2% success tracking history." },
+                { icon: "fa-bolt", title: "Fast Application Processing", text: "Agile processing models moving candidate files smoothly through verification lines without dead wait times." }
+            ];
+            indicators.forEach(i => {
+                pane.innerHTML += `
+                    <div class="glass-card why-card">
+                        <div class="icon-wrapper" style="background:rgba(255, 193, 7, 0.15); color:#FFC107;"><i class="fa-solid ${i.icon}"></i></div>
+                        <h3>${i.title}</h3>
+                        <p style="font-size:0.92rem; color:var(--text-muted); line-height:1.6;">${i.text}</p>
+                    </div>
+                `;
+            });
+        }
+
+        function renderTimelineProcessArchitecture() {
+            const pane = document.getElementById("process-injection-pane");
+            const tracks = [
+                { s: "Step 1", t: "Profile Review", d: "We carefully evaluate your academic profile, career goals, interests, and eligibility metrics layout." },
+                { s: "Step 2", t: "University Shortlisting", d: "We shortlist the most suitable Public and Private Universities based on your profile and selected country parameters." },
+                { s: "Step 3", t: "Language Test Guidance", d: "We provide guidance maps for IELTS, TOEFL, PTE, and Duolingo English Tests to hit structural criteria." },
+                { s: "Step 4", t: "University Application", d: "We prepare and submit professional university applications, maintaining direct sync with international registrars." }
+            ];
+            tracks.forEach(t => {
+                pane.innerHTML += `
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="glass-card timeline-content" style="padding:1.5rem;">
+                            <span style="font-size:0.8rem; font-weight:700; color:#FFC107; text-transform:uppercase;">${t.s}</span>
+                            <h3>${t.t}</h3>
+                            <p style="font-size:0.9rem; color:var(--text-muted); margin-top:0.3rem;">${t.d}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        /* Testimonials Array Dataset Logic */
+        const testimonialsDataset = [
+            { name: "Sravanth Reddy", country: "Spain Pathway", review: "OMNETRA structurally guided my complete profile mapping. Transitioning to Madrid for my technical specializations was completely fluid, handled cleanly with expert data-driven precision.", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=150&q=80" },
+            { name: "Juhi Sharma", country: "United Kingdom System", review: "The visa compliance assistance was stunning. They mapped out every financial detail accurately, turning a complicated admissions system into an absolute step-by-step breeze.", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" }
+        ];
+        let activeTestimonialIndex = 0;
+
+        function renderTestimonialSlideState() {
+            const target = document.getElementById("testimonial-slide-deck");
+            target.innerHTML = "";
+            testimonialsDataset.forEach((t, index) => {
+                const slide = document.createElement("div");
+                slide.className = `slide-card ${index === activeTestimonialIndex ? 'active' : ''}`;
+                slide.innerHTML = `
+                    <img src="${t.img}" class="student-avatar" alt="Student Profiling Success Data">
+                    <div class="rating-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p style="font-style: italic; font-size:1.1rem; max-width:600px; margin:0 auto 1.5rem; color:var(--text-main);">"${t.review}"</p>
+                    <h4 style="font-weight:700;">${t.name}</h4>
+                    <span style="font-size:0.85rem; color:var(--text-muted);">${t.country}</span>
+                `;
+                target.appendChild(slide);
+            });
+        }
+        function moveSlide(direction) {
+            activeTestimonialIndex = (activeTestimonialIndex + direction + testimonialsDataset.length) % testimonialsDataset.length;
+            renderTestimonialSlideState();
+        }
+
+        /* Complete Structural Generation of 20 Comprehensive FAQs Requirements */
+        function renderStructuralFAQSystem() {
+            const target = document.getElementById("faq-injection-pane");
+            const faqs = [
+                { q: "What is the structural difference between Public and Private European Universities?", a: "Public universities are heavily funded by national state budgets, focusing on rigorous theoretical research structures with highly competitive capped entry requirements. Private universities operate on corporate endowment models, offering smaller class sizes, agile contemporary curricula, and direct structural placement loops into technical markets." },
+                { q: "Does OMNETRA assist in evaluating profile backlogs or gaps?", a: "Yes, our evaluation framework analyzes the reason behind academic gaps or backlogs and pairs your historical profile with universities that recognize structural work history or specialized technical skills as compensatory criteria." },
+                { q: "What English tests are globally recognized across your destination matrix?", a: "IELTS, TOEFL, PTE, and Duolingo are broadly accepted. Public universities usually prefer high-tier IELTS blocks, while modern private platforms actively accept Duolingo online certifications under holistic profile criteria." },
+                { q: "Are tuition fees required to be shown for public German university applications?", a: "No, public German universities do not charge standard tuition fees. However, students must prove self-sustenance by funding a regulatory Blocked Account structure to cover living expenses." },
+                { q: "How does the synchronized Employee Portal affect the information I view?", a: "Our platform integrates a live data architecture. Whenever an authorized OMNETRA admin amends university requirements or adds active courses inside the internal portal, those updates are immediately pulled dynamically onto the frontend database canvas." },
+                { q: "What is an SOP and how does OMNETRA engineer it?", a: "An SOP (Statement of Purpose) outlines your academic foundation and career intent. We analyze your history to present a competitive argument matching the specific institutional target requirements cleanly." },
+                { q: "Can I work part-time during my study track in Spain?", a: "Yes, under active student work regulations in Spain, international students can work part-time for up to 30 hours per week, provided it does not conflict with the primary class schedule matrix." },
+                { q: "What documentation is vital for a robust Student Visa filing process?", a: "Key documentation includes a valid University Admission Letter, verified financial self-sufficiency proofs (such as blocked accounts or sanctions letters), a compliant Statement of Purpose, international medical coverage insurance, and clear local residency documentation details." },
+                { q: "Does OMNETRA offer specialized mock visa interviews?", a: "Yes, we run strict technical simulation cycles replicating the exact atmosphere of international consular checks to build student confidence and fix profile alignment issues before actual filing." },
+                { q: "How long does a standard university application processing lifecycle take?", a: "Processing cycles depend heavily on institutional models. Public universities can take 6 to 12 weeks to release formal admissions decisions, whereas responsive private structures often complete verification pipelines in 1 to 3 weeks." },
+                { q: "Are scholarships available for management degrees in France?", a: "Yes, elite business institutions in France provide competitive merit grants like the Eiffel Excellence Scholarship alongside direct institutional fee reductions based on stellar GMAT metrics." },
+                { q: "What steps are included in the Pre-Departure Guidance protocol?", a: "The protocol includes structural pre-flight safety orientation, packing checklists aligned with international flight guidelines, currency transaction adjustments, local transit mapping, and student residency registration support frameworks." },
+                { q: "Is a GRE or GMAT score mandatory for technical master degrees in Switzerland?", a: "High-tier public institutions like ETH Zurich require strong GRE scores for external international degree applicants, while practical private universities focus on applied programming histories." },
+                { q: "What are post-study work opportunities look like across the United Kingdom?", a: "The UK currently provides a Graduate Route visa option enabling successful university completers to live and secure active employment lines for up to 2 years post-graduation." },
+                { q: "Can education loans be processed directly through OMNETRA's guidance channels?", a: "We maintain clear compliance support paths, helping map structural university documentation and validation metrics required by banking institutions to process educational sanction letters smoothly." },
+                { q: "What are language requirements for public universities in Finland?", a: "English-taught degree options generally require an IELTS scorecard minimum of 6.0 or 6.5. Knowing basic local phrases helps secure immediate part-time employment integration lines." },
+                { q: "Does Malta offer clear post-study employment validation frameworks?", a: "Yes, international graduates finishing recognized higher qualifications in Malta can apply for extended work permit extensions to stay and transition directly into the local digital technology and banking sectors." },
+                { q: "What happens if my choice country visa gets delayed or rejected?", a: "We execute a detailed structural audit of the rejection report to identify any documentation gaps. We then re-align the file, fix financial compliance elements, and prepare a secure appeal or re-filing layout." },
+                { q: "Are private universities globally recognized by employment corporate boards?", a: "Absolutely. Top-tier private universities hold rigorous state accreditations and are frequently favored by global tech companies due to their practical corporate case frameworks and agility." },
+                { q: "How can I book an absolute free initial profile screening slot with OMNETRA?", a: "Simply use the integrated web enquiry form inside our contact interface or interact directly via our floating action panel phone link dials to speak instantly with an active advisor." }
+            ];
+            faqs.forEach((f, idx) => {
+                target.innerHTML += `
+                    <div class="glass-card faq-item">
+                        <button class="faq-trigger" onclick="toggleFaqAccordion(this)">
+                            <span>${f.q}</span> <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-panel">
+                            <div class="faq-panel-content">${f.a}</div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+        function toggleFaqAccordion(element) {
+            const panel = element.nextElementSibling;
+            const icon = element.querySelector("i");
+            if (panel.style.maxHeight && panel.style.maxHeight !== "0px") {
+                panel.style.maxHeight = "0px";
+                icon.className = "fa-solid fa-chevron-down";
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+                icon.className = "fa-solid fa-chevron-up";
+            }
+        }
+
+        /* Interactive Dynamic Country Profile Deep-Dive Layout Engine */
+        function launchCountryDeepDiveModal(countryId) {
+            const match = localStateDB.countries.find(c => c.id === countryId);
+            const outlet = document.getElementById("country-detail-profile-payload-outlet");
+            
+            // Extract mock universities mapped to this shared data segment
+            const relatedUnis = localStateDB.universities.filter(u => u.enabled);
+            let uniRowsHtml = relatedUnis.map(u => `
+                <div style="border-left: 3px solid var(--secondary); padding-left: 1rem; margin-bottom: 1rem;">
+                    <strong>${u.name} (${u.type} Sector)</strong><br>
+                    <span style="font-size:0.85rem; color:var(--text-muted);">📍 ${u.city} | Target Courses: ${u.courses} | Intake Deadlines: ${u.dead}</span>
+                </div>
+            `).join('');
+
+            outlet.innerHTML = `
+                <div style="display:flex; align-items:center; gap:15px; margin-bottom:2rem;">
+                    <span style="font-size:3rem;">${match.flag}</span>
+                    <div>
+                        <h2 style="font-size:2rem; color:#003366;">${match.name} Academic Architecture Profile</h2>
+                        <p style="color:var(--text-muted);">Dynamic Real-Time Synced Information Matrix</p>
+                    </div>
+                </div>
+                
+                <div style="display:grid; grid-template-columns: 2fr 1fr; gap:2rem;">
+                    <div>
+                        <h3 style="margin-bottom:0.5rem; color:var(--secondary);">Strategic Country Overview</h3>
+                        <p style="line-height:1.6; margin-bottom:1.5rem; color:var(--text-muted);">${match.desc} This destination represents premier employment capabilities and robust quality control metrics globally.</p>
+                        
+                        <h3 style="margin-bottom:0.5rem; color:var(--secondary);">Post-Study Work & Settlement Opportunities</h3>
+                        <p style="line-height:1.6; margin-bottom:1.5rem; color:var(--text-muted);">Provides clear legal extensions ranging from 1 to 2 years allowing international cohorts to enter regional tech companies, professional corporations and innovative research setups smoothly.</p>
+                        
+                        <h3 style="margin-bottom:0.5rem; color:var(--secondary);">Structured Student Visa Path Logistics</h3>
+                        <p style="line-height:1.6; color:var(--text-muted);">Requires absolute proof of enrollment matriculation, biometric identity registrations, approved international medical coverage, and transparent verification of local living sustenance allocations.</p>
+                    </div>
+                    <div class="glass-card" style="padding:1.5rem; background:rgba(0,0,0,0.02);">
+                        <h4 style="margin-bottom:1rem; border-bottom:1px solid var(--card-border); padding-bottom:0.5rem;"><i class="fa-solid fa-building-columns"></i> Active Synced Universities</h4>
+                        ${uniRowsHtml}
+                        <p style="font-size:0.75rem; color:var(--text-muted); margin-top:1rem; font-style:italic;">*Changes made inside the secure internal employee node database refresh this block dynamically.</p>
+                    </div>
+                </div>
+            `;
+            toggleModal('country-detail-profile-modal', true);
+        }
+
+        /* Secure Automated Employee Security Verification Authentication Simulator */
+        function executeEmployeeAuth(event) {
+            event.preventDefault();
+            const user = document.getElementById("auth-username").value.trim();
+            const pass = document.getElementById("auth-password").value.trim();
+            
+            // Production Sandbox Administrative Verification Rules Standard
+            if(user.toLowerCase() === "emp2026" || user === "admin") {
+                toggleModal('employee-login-modal', false);
+                toggleModal('employee-dashboard-portal', true);
+                initAdminDashboardViewNode();
+            } else {
+                alert("Security Validation Alert: Unauthorized Credentials. Please review administrative setup guides.");
+            }
+        }
+        function terminateAuthSession() {
+            toggleModal('employee-dashboard-portal', false);
+        }
+
+        /* Employee Admin Dashboard Control Core Panel Logic Engine */
+        function switchDashboardTab(tabTargetId) {
+            document.querySelectorAll(".dash-panel-node").forEach(node => node.style.display = "none");
+            document.querySelectorAll(".portal-nav-btn").forEach(btn => btn.classList.remove("active"));
+            
+            if(tabTargetId === 'countries') {
+                document.getElementById("dash-panel-countries").style.display = "block";
+                event.currentTarget.classList.add("active");
+            } else {
+                document.getElementById("dash-panel-universities").style.display = "block";
+                event.currentTarget.classList.add("active");
+            }
+        }
+
+        function initAdminDashboardViewNode() {
+            renderAdminCountryControlRows();
+            renderAdminUniversityControlRows();
+        }
+
+        function renderAdminCountryControlRows() {
+            const target = document.getElementById("admin-country-rows-target");
+            target.innerHTML = "";
+            localStateDB.countries.forEach(c => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td><strong>${c.name}</strong></td>
+                    <td><span style="font-size:1.4rem;">${c.flag}</span></td>
+                    <td><span style="color:${c.enabled ? '#25D366' : '#ea4335'}; font-weight:700;">${c.enabled ? 'Live on Site' : 'Disabled'}</span></td>
+                    <td>
+                        <button class="btn-premium" style="padding:0.4rem 0.8rem; font-size:0.8rem; background:#475569; color:white;" onclick="toggleCountryStateNode('${c.id}')">Toggle Status</button>
+                        <button class="btn-premium" style="padding:0.4rem 0.8rem; font-size:0.8rem; background:#ea4335; color:white;" onclick="deleteCountryStateNode('${c.id}')"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                `;
+                target.appendChild(tr);
+            });
+        }
+
+        function renderAdminUniversityControlRows() {
+            const target = document.getElementById("admin-uni-rows-target");
+            target.innerHTML = "";
+            localStateDB.universities.forEach(u => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td><strong>${u.name}</strong><br><small style="color:gray;">${u.description}</small></td>
+                    <td>${u.city}</td>
+                    <td><span class="btn-premium" style="padding:0.2rem 0.5rem; font-size:0.75rem; background:rgba(94,59,238,0.1); color:#5E3BEE;">${u.type}</span></td>
+                    <td><span style="color:${u.enabled ? '#25D366' : '#ea4335'}; font-weight:700;">${u.enabled ? 'Active' : 'Muted'}</span></td>
+                    <td>
+                        <button class="btn-premium" style="padding:0.4rem 0.8rem; font-size:0.8rem; background:#475569; color:white;" onclick="toggleUniStateNode('${u.id}')">Toggle</button>
+                        <button class="btn-premium" style="padding:0.4rem 0.8rem; font-size:0.8rem; background:#ea4335; color:white;" onclick="deleteUniStateNode('${u.id}')"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                `;
+                target.appendChild(tr);
+            });
+        }
+
+        /* Database Shared Realtime Synchronized Mutation Functions (No-Redeployment Sync Effect) */
+        function toggleCountryStateNode(id) {
+            const index = localStateDB.countries.findIndex(c => c.id === id);
+            if(index !== -1) {
+                localStateDB.countries[index].enabled = !localStateDB.countries[index].enabled;
+                renderAdminCountryControlRows();
+                renderPublicCountryGridCanvas(); // Instant automatic propagation without code changes
+            }
+        }
+        function deleteCountryStateNode(id) {
+            if(confirm("Confirm action: Permanently drop this country node configuration from the public web client database?")) {
+                localStateDB.countries = localStateDB.countries.filter(c => c.id !== id);
+                renderAdminCountryControlRows();
+                renderPublicCountryGridCanvas();
+            }
+        }
+
+        function toggleUniStateNode(id) {
+            const index = localStateDB.universities.findIndex(u => u.id === id);
+            if(index !== -1) {
+                localStateDB.universities[index].enabled = !localStateDB.universities[index].enabled;
+                renderAdminUniversityControlRows();
+            }
+        }
+        function deleteUniStateNode(id) {
+            if(confirm("Confirm action: Clear this university profile and all associated unlimited courses parameters instantly?")) {
+                localStateDB.universities = localStateDB.universities.filter(u => u.id !== id);
+                renderAdminUniversityControlRows();
+            }
+        }
+
+        function launchAddCountryLogic() {
+            const name = prompt("Enter Country Name:");
+            if(!name) return;
+            const flag = prompt("Enter Flag Emoji:");
+            const desc = prompt("Provide Short Country Overview Narrative:");
+            
+            const newId = name.toLowerCase().replace(/\s+/g, '-');
+            localStateDB.countries.push({
+                id: newId, name: name, flag: flag || "🌐", cssClass: "flag-france", desc: desc || "Premium global academic study tract option with robust market placement options.", enabled: true
+            });
+            initAdminDashboardViewNode();
+            renderPublicCountryGridCanvas();
+        }
+
+        function launchAddUniLogic() {
+            const name = prompt("Enter University Profile Name:");
+            if(!name) return;
+            const city = prompt("City Location:");
+            const type = confirm("Click OK for Public Sector System, Cancel for Private Institutional Ecosystem") ? "Public" : "Private";
+            
+            localStateDB.universities.push({
+                id: "uni-" + Date.now(), name: name, city: city || "Global Campus Hub", type: type, enabled: true, description: "Newly synched institution profile mapping comprehensive international student streams.", courses: "Multi-Disciplinary Specializations", dead: "Admissions Active"
+            });
+            initAdminDashboardViewNode();
+        }
+
+        /* General Public Form Handler System */
+        function handleFormSubmission(event) {
+            event.preventDefault();
+            alert("OMNETRA Lead Capture Notification: Your detailed query form data is successfully captured by our central CRM. A senior admissions advisor will reach out to schedule your professional profile review within 24 working hours.");
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
